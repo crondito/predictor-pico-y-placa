@@ -1,8 +1,11 @@
 package predictor;
 
 import java.awt.Color;
+import static java.lang.Integer.parseInt;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,7 +35,8 @@ public class PredictorGUI extends javax.swing.JFrame {
         return s.matches(pattern);
     }
     
-    private boolean licensePlateCheck(Date date){
+    private boolean licensePlateCheck(LocalDateTime date2, int number){
+        boolean go;
         
         return true;
     }
@@ -112,10 +116,6 @@ public class PredictorGUI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel3)
@@ -124,7 +124,11 @@ public class PredictorGUI extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField1)
                             .addComponent(jFormattedTextField1)
-                            .addComponent(jFormattedTextField2))))
+                            .addComponent(jFormattedTextField2)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -144,11 +148,11 @@ public class PredictorGUI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addContainerGap())
+                    .addComponent(jButton1)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -199,15 +203,25 @@ public class PredictorGUI extends javax.swing.JFrame {
                     isNumeric(Character.toString(ch[5]))== true &&
                     isNumeric(Character.toString(ch[6]))== true
                 ){
+                    // Get the date
                     Date date = new Date();
                     try {
-                        // jTextField2.setText("Valid");
-                        // jTextField2.setBackground(Color.green);
                         date = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(jFormattedTextField1.getText() + " " + jFormattedTextField2.getText());
                     } catch (ParseException ex) {
                         Logger.getLogger(PredictorGUI.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    System.out.println(date);
+                    LocalDateTime date2;
+                    date2 = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();;
+                    // Get the last number from the license plate
+                    int number = parseInt(Character.toString(ch[6]));
+                    // Check the license plate
+                    if (licensePlateCheck(date2, number) == true){
+                        jTextField2.setText("YOU MAY USE YOUR VEHICLE");
+                        jTextField2.setBackground(Color.green);
+                    } else {
+                        jTextField2.setText("YOU CANNOT USE YOUR VEHICLE");
+                        jTextField2.setBackground(Color.red);
+                    }
                 } else {
                     jTextField2.setText("Invalid data");
                     jTextField2.setBackground(Color.yellow);
