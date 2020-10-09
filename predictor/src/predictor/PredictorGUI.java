@@ -1,10 +1,5 @@
 package predictor;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
-
 /**
  *
  * @author Carlos Rodas
@@ -13,21 +8,23 @@ public class PredictorGUI extends javax.swing.JFrame {
 
     public PredictorGUI() {
         initComponents();
-        // Check time
-        Timer t = new Timer();
-        t.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                checkTime();
-            }
-        }, 0, 1000);
     }
     
-    private void checkTime(){
-        Date dateAndTime = Calendar.getInstance().getTime();
-        jLabel2.setText(dateAndTime.toString());
+    private boolean isAlphaNumeric(String s){
+        String pattern= "^[a-zA-Z0-9]*$";
+        return s.matches(pattern);
     }
-
+    
+    private boolean isNumeric(String s){
+        String pattern= "[0-9]*$";
+        return s.matches(pattern);
+    }
+    
+    private boolean isALetter(String s){
+        String pattern= "^[a-zA-Z]*$";
+        return s.matches(pattern);
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -150,17 +147,45 @@ public class PredictorGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        // Validate if it is alphanumeric
+        if(isAlphaNumeric(jTextField1.getText()) == true && jTextField1.getText().isEmpty() == false){
+            String str = jTextField1.getText();
+            char[] ch = new char[str.length()];
+            for (int i = 0; i < str.length(); i++) { 
+                ch[i] = str.charAt(i); 
+            }
+            // Validate if it is an Ecuadorian License Plate
+            if (ch.length == 7){
+                if (
+                    isALetter(Character.toString(ch[0]))== true &&
+                    isALetter(Character.toString(ch[1]))== true &&
+                    isALetter(Character.toString(ch[2]))== true &&
+                    isNumeric(Character.toString(ch[3]))== true &&
+                    isNumeric(Character.toString(ch[4]))== true &&
+                    isNumeric(Character.toString(ch[5]))== true &&
+                    isNumeric(Character.toString(ch[6]))== true
+                ){
+                    // Aquí falta
+                } else {
+                    jTextField2.setText("Not a valid License Plate");
+                }
+            } else {
+                jTextField2.setText("Not a valid License Plate");
+            }
+        } else {
+            jTextField2.setText("Not a valid License Plate");
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTextField2ActionPerformed
-
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
