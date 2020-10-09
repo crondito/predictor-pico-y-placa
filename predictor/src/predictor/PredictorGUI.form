@@ -164,7 +164,7 @@
               <Properties>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
-                <Property name="text" type="java.lang.String" value="&quot;Pico y Placa&quot; Rules:&#xa;During this hours:&#xa;07:00 to 09:30 and 16:00 to 19:30&#xa;You can&apos;t use any vehicule inside of Quito if the last&#xa;number of its license plate is:&#xa;- 1 or 2 on Mondays&#xa;- 3 or 4 on Tuesdays&#xa;- 5 or 6 on Wednesdays&#xa;- 7 or 8 on Thursdays&#xa;- 9 or 0 on Friedays&#xa;Weekends and holidays have no restrictions."/>
+                <Property name="text" type="java.lang.String" value="&quot;Pico y Placa&quot;&#xa;During the following hours:&#xa;07:00 AM to 09:30 AM and 04:00 PM to 07:30 PM&#xa;You can&apos;t use any vehicule inside of Quito if the last&#xa;number of its license plate is:&#xa;- 1 or 2 on Mondays&#xa;- 3 or 4 on Tuesdays&#xa;- 5 or 6 on Wednesdays&#xa;- 7 or 8 on Thursdays&#xa;- 9 or 0 on Fridays&#xa;Weekends and holidays have no restrictions."/>
                 <Property name="focusable" type="boolean" value="false"/>
               </Properties>
             </Component>
@@ -172,7 +172,7 @@
         </Container>
         <Component class="javax.swing.JTextField" name="jTextField2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Please complete the fields"/>
+            <Property name="text" type="java.lang.String" value="Complete all fields"/>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -195,9 +195,9 @@
         <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField2">
           <Properties>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-              <Format format="hh:mm a" subtype="-1" type="2"/>
+              <Format format="HH:mm" subtype="-1" type="2"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="hh:mm a | ex: 03:56 PM"/>
+            <Property name="toolTipText" type="java.lang.String" value="HH:mm | ex: 15:56"/>
           </Properties>
         </Component>
       </SubComponents>

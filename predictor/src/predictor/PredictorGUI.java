@@ -1,6 +1,11 @@
 package predictor;
 
 import java.awt.Color;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -25,6 +30,11 @@ public class PredictorGUI extends javax.swing.JFrame {
     private boolean isALetter(String s){
         String pattern= "^[a-zA-Z]*$";
         return s.matches(pattern);
+    }
+    
+    private boolean licensePlateCheck(Date date){
+        
+        return true;
     }
     
     @SuppressWarnings("unchecked")
@@ -73,11 +83,11 @@ public class PredictorGUI extends javax.swing.JFrame {
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jTextArea1.setText("\"Pico y Placa\" Rules:\nDuring this hours:\n07:00 to 09:30 and 16:00 to 19:30\nYou can't use any vehicule inside of Quito if the last\nnumber of its license plate is:\n- 1 or 2 on Mondays\n- 3 or 4 on Tuesdays\n- 5 or 6 on Wednesdays\n- 7 or 8 on Thursdays\n- 9 or 0 on Friedays\nWeekends and holidays have no restrictions.");
+        jTextArea1.setText("\"Pico y Placa\"\nDuring the following hours:\n07:00 AM to 09:30 AM and 04:00 PM to 07:30 PM\nYou can't use any vehicule inside of Quito if the last\nnumber of its license plate is:\n- 1 or 2 on Mondays\n- 3 or 4 on Tuesdays\n- 5 or 6 on Wednesdays\n- 7 or 8 on Thursdays\n- 9 or 0 on Fridays\nWeekends and holidays have no restrictions.");
         jTextArea1.setFocusable(false);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jTextField2.setText("Please complete the fields");
+        jTextField2.setText("Complete all fields");
         jTextField2.setFocusable(false);
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,8 +100,8 @@ public class PredictorGUI extends javax.swing.JFrame {
         jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
         jFormattedTextField1.setToolTipText("dd/mm/yy | ex: 15/09/2019");
 
-        jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("hh:mm a"))));
-        jFormattedTextField2.setToolTipText("hh:mm a | ex: 03:56 PM");
+        jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("HH:mm"))));
+        jFormattedTextField2.setToolTipText("HH:mm | ex: 15:56");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -189,8 +199,15 @@ public class PredictorGUI extends javax.swing.JFrame {
                     isNumeric(Character.toString(ch[5]))== true &&
                     isNumeric(Character.toString(ch[6]))== true
                 ){
-                    jTextField2.setText("Valid");
-                    jTextField2.setBackground(Color.green);
+                    Date date = new Date();
+                    try {
+                        // jTextField2.setText("Valid");
+                        // jTextField2.setBackground(Color.green);
+                        date = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(jFormattedTextField1.getText() + " " + jFormattedTextField2.getText());
+                    } catch (ParseException ex) {
+                        Logger.getLogger(PredictorGUI.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    System.out.println(date);
                 } else {
                     jTextField2.setText("Invalid data");
                     jTextField2.setBackground(Color.yellow);
@@ -210,7 +227,7 @@ public class PredictorGUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTextField1ActionPerformed
     
-    public static void main(String args[]) {
+    public static void main(String args[]) throws Exception {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
