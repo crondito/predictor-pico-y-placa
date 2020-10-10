@@ -138,7 +138,6 @@ public class PredictorGUI extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMaximumSize(new java.awt.Dimension(1000, 800));
         setMinimumSize(new java.awt.Dimension(550, 450));
-        setPreferredSize(new java.awt.Dimension(550, 450));
         setSize(new java.awt.Dimension(500, 400));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
