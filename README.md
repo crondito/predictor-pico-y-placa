@@ -12,7 +12,7 @@ You can't use any vehicule inside of Quito if the last number of its license pla
  <li>3 or 4 on Tuesdays</li>
  <li>5 or 6 on Wednesdays</li>
  <li>7 or 8 on Thursdays</li>
- <li>9 or 0 on Friedays</li>
+ <li>9 or 0 on Fridays</li>
  <li>Weekends and holidays have no restrictions.</li>
 </ul>
 
